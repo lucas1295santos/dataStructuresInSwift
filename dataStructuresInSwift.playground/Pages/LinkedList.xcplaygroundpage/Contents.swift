@@ -1,5 +1,19 @@
-// Testing Linked Lists
 
+/*:
+ 
+ # LinkedList
+ 
+ - Linked list is like an array, but it has no concept of indexes.
+
+ - Data is structured by links. Each object holds a pointer to the next one, forming this link.
+
+ - It is less versatile than Array, but it can do operations like insertions and deletions on O(1) (aka constant time).
+    - To insert an element at position n, we would: make the element at n-1 point to the new element, then make the new element point to the element that was at n.
+ 
+ -  Swift does not comes with a default implementation of LinkedList
+ 
+*/
+ 
 // Set up some Nodes
 let n1 = Node(value: 1)
 let n2 = Node(value: 2)

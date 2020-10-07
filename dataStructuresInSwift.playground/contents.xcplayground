@@ -3,5 +3,6 @@
     <pages>
         <page name='LinkedList'/>
         <page name='Stack'/>
+        <page name='Queue'/>
     </pages>
 </playground>

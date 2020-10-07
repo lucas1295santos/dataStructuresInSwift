@@ -1,86 +1,82 @@
-public class Node {
-    public var value: Int
+public class Node<T: Equatable> {
+    public var value: T
     public var next: Node?
     
-    public init(value: Int) {
+    public init(value: T) {
         self.value = value
     }
 }
 
-public class LinkedList {
+public class LinkedList<T: Equatable> {
+    public var head: Node<T>?
     
-    public var head: Node?
-    
-    public init(head: Node?) {
+    public init(head: Node<T>? = nil) {
         self.head = head
     }
     
-    public func append(_ node: Node) {
-        
-        guard head != nil else {
+    public func addFirst(node: Node<T>) {
+        node.next = head
+        head = node
+    }
+    
+    public func addLast(node: Node<T>) {
+        guard var currentNode = head else {
             head = node
             return
         }
-        
-        var current = head
-        while let _ = current?.next {
-            current = current?.next
-        }
-        current?.next = node
-    }
-    
-    // Get a node from a particular position.
-    // Assume the first position is "1".
-    // Return "nil" if position is not in the list.
-    public func getNode(atPosition position: Int) -> Node? {
-        guard head != nil else { return nil }
-        guard position > 1 else { return head }
-        var node = head
-        
-        for _ in 1 ..< position {
-            let next = node?.next
-            node = next
-        }
-        
-        return node
-    }
-    
-    // Insert a new node at the given position.
-    // Assume the first position is "1".
-    // Inserting at position 3 means between
-    // the 2nd and 3rd nodes.
-    public func insertNode(_ node: Node, at position: Int) {
-        var currentNode = head
-        
-        for _ in 2 ..< position {
-            let nextNode = currentNode?.next
-            currentNode = nextNode
-        }
-        
-        let currentNextNode = currentNode?.next
-        currentNode?.next = node
-        currentNode?.next?.next = currentNextNode
-    }
-    
-    // Delete the first node with a given value.
-    public func deleteNode(withValue value: Int) {
-        guard let head = self.head else { return }
-        
-        if head.value == value {
-            let next = head.next
-            self.head = next
-            return
-        }
-        
-        var currentNode = head
-                
         while let nextNode = currentNode.next {
-            if nextNode.value == value {
-                let newNextNode = nextNode.next
-                currentNode.next = newNextNode
-                return
-            }
             currentNode = nextNode
+        }
+        currentNode.next = node
+    }
+    
+    public func addBefore(_ node: Node<T>, nodeWithValue value: T) {
+        var currentNode = head
+        if currentNode?.value == value {
+            node.next = head
+            head = node
+        } else {
+            while currentNode?.next != nil {
+                if currentNode?.next?.value == value {
+                    node.next = currentNode?.next
+                    currentNode?.next = node
+                    return
+                } else {
+                    currentNode = currentNode?.next
+                }
+            }
+        }
+    }
+    
+    public func addAfter(_ node: Node<T>, nodeWithValue value: T) {
+        var currentNode = head
+        while currentNode != nil {
+            if currentNode?.value == value {
+                let next = currentNode?.next
+                currentNode?.next = node
+                node.next = next
+                return
+            } else {
+                currentNode = currentNode?.next
+            }
+        }
+    }
+    
+    public func deleteFirst(nodeWithValue value: T) {
+        var currentNode = head
+        if currentNode?.value == value {
+            head = currentNode?.next
+        } else {
+            while currentNode?.next != nil {
+                if currentNode?.next?.value == value {
+                    let newNext = currentNode?.next?.next
+                    currentNode?.next?.next = nil
+                    currentNode?.next = newNext
+                    return
+                } else {
+                    currentNode = currentNode?.next
+                }
+            }
         }
     }
 }

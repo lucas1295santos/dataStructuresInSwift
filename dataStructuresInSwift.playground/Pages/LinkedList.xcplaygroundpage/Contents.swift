@@ -3,38 +3,68 @@
  
  # LinkedList
  
- - Linked list is like an array, but it has no concept of indexes.
+ - Linked list is list based collection. Think of it like a list, but with no concept of indexes.
 
- - Data is structured by links. Each object holds a pointer to the next one, forming this link.
+ - Data is structured by linking nodes. Each node holds a pointer to the next one, forming this links.
 
- - It is less versatile than Array, but it can do operations like insertions and deletions on O(1) (aka constant time).
-    - To insert an element at position n, we would: make the element at n-1 point to the new element, then make the new element point to the element that was at n.
+ - It is less versatile than a list, but there are effieciency trade-offs to consider:
+    - Insertions and deletions can be done in O(1) if you have the reference to the nodes you need to do the operation (constant time).
+    - Since it does not have indexing, getting an arbitrary element will be slower.
+    - If you wan't to know more about complexity on Linked Lists and other data structures, refer to [this cheatSheet](https://www.bigocheatsheet.com)
  
  -  Swift does not comes with a default implementation of LinkedList
  
-*/
+ - Check the file Sources/LinkedLits.swift to see implementation
  
-// Set up some Nodes
+ - Learn more at: [cs.cmu.edu](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html)
+ 
+ - Note: don't force unwrap on your real projects!
+*/
+
+// Set up some nodes
 let n1 = Node(value: 1)
 let n2 = Node(value: 2)
 let n3 = Node(value: 3)
 let n4 = Node(value: 4)
 
-// Start setting up a LinkedList
-let ll = LinkedList(head: n1)
-ll.append(n2)
-ll.append(n3)
+// Both in nodes and LinkedList, the generic value T is infered as int
+let linkedList = LinkedList(head: n1)
 
-// Test getNode(atPosition:)
-print(ll.head!.next!.next!.value) // Should print 3
-print(ll.getNode(atPosition: 3)!.value) // Should also print 3
+print(linkedList.head!.value) // 1
 
-// Test insert
-ll.insertNode(n4, at: 3)
-print(ll.getNode(atPosition: 3)!.value) // Should print 4 now
+linkedList.addFirst(node: n2)
 
-// Test delete(withValue:)
-ll.deleteNode(withValue: 1)
-print(ll.getNode(atPosition: 1)!.value) // Should print 2 now
-print(ll.getNode(atPosition: 2)!.value) // Should print 4 now
-print(ll.getNode(atPosition: 3)!.value) // Should print 3
+print("\(linkedList.head!.value), \(linkedList.head!.next!.value)") // 2, 1
+
+linkedList.addLast(node: n3)
+print(
+    "\(linkedList.head!.value), " +
+    "\(linkedList.head!.next!.value), " +
+    "\(linkedList.head!.next!.next!.value)"
+) // 2, 1, 3
+
+linkedList.addAfter(n4, nodeWithValue: 1)
+
+print(
+    "\(linkedList.head!.value), " +
+    "\(linkedList.head!.next!.value), " +
+    "\(linkedList.head!.next!.next!.value), " +
+    "\(linkedList.head!.next!.next!.next!.value)"
+) // 2, 1, 4, 3
+
+linkedList.deleteFirst(nodeWithValue: 1)
+
+print(
+    "\(linkedList.head!.value), " +
+    "\(linkedList.head!.next!.value), " +
+    "\(linkedList.head!.next!.next!.value)"
+) // 2, 4, 3
+
+linkedList.addBefore(n1, nodeWithValue: 3)
+
+print(
+    "\(linkedList.head!.value), " +
+    "\(linkedList.head!.next!.value), " +
+    "\(linkedList.head!.next!.next!.value), " +
+    "\(linkedList.head!.next!.next!.next!.value)"
+) // 2, 4, 1, 3

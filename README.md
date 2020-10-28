@@ -5,7 +5,7 @@ Implementing and explaining Data Structures in Swift. ❤️
 ## Project status
 
 - [x] LinkedList
-- [ ] Stack
+- [x] Stack
 - [ ] Queue
 - [ ] What's next?
 

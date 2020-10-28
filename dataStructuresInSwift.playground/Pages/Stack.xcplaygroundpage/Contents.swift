@@ -13,23 +13,18 @@
 
 import LinkedList_PageSources
 
-// Set up some nodes
-let n1 = Node(value: 1)
-let n2 = Node(value: 2)
-let n3 = Node(value: 3)
-
-// The generic value could be infered if I initialized this stack with a top node let stack = Stack(n1)
+// The generic value could be infered if I initialized this stack with a top value let stack = Stack(1)
 let stack = Stack<Int>()
 
-print(stack.peek()?.value as Any) // nil
+print(stack.peek() as Any) // nil
 
-stack.push(n1)
-print(stack.peek()!.value) // 1
+stack.push(1)
+print(stack.peek()!) // 1
 
-stack.push(n2)
-stack.push(n3)
-print(stack.peek()!.value) // 3
+stack.push(2)
+stack.push(3)
+print(stack.peek()!) // 3
 
-print(stack.pop()!.value) // 3
+print(stack.pop()!) // 3
 
-print(stack.peek()!.value) // 2
+print(stack.peek()!) // 2

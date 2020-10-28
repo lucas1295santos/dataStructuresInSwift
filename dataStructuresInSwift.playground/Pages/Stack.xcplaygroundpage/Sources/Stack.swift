@@ -5,21 +5,25 @@ public class Stack<T: Equatable> {
     
     private var linkedList: LinkedList<T>
     
-    public init(top: Node<T>? = nil) {
-        self.linkedList = LinkedList(head: top)
+    public init(top: T? = nil) {
+        if let topValue = top {
+            self.linkedList = LinkedList(head: .init(value: topValue))
+        } else {
+            self.linkedList = LinkedList<T>()
+        }
     }
     
-    public func push(_ node: Node<T>) {
-        linkedList.addFirst(node: node)
+    public func push(_ value: T) {
+        linkedList.addFirst(node: .init(value: value))
     }
     
-    public func pop() -> Node<T>? {
+    public func pop() -> T? {
         let head = linkedList.head
         linkedList.head = head?.next
-        return head
+        return head?.value
     }
     
-    public func peek() -> Node<T>? {
-        return linkedList.head
+    public func peek() -> T? {
+        return linkedList.head?.value
     }
 }

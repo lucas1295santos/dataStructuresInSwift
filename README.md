@@ -7,6 +7,7 @@ Implementing and explaining Data Structures in Swift. ❤️
 - [x] LinkedList
 - [x] Stack
 - [ ] Queue
+- [x] Hashtable
 - [ ] What's next?
 
 ## References

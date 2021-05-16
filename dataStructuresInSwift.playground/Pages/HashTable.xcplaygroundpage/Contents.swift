@@ -37,7 +37,6 @@ import HashTable_PageSources
 
 func simpleHashingFunction(key: Hashable) -> Int {
     let hash = key.intRepresentation() % 31
-//    print("Generated hash -> \(hash)")
     return hash
 }
 
